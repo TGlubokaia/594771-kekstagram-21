@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Таня Глубокая](https://up.htmlacademy.ru/javascript/21/user/594771).
-* Наставник: [Владислав Молчанов](https://htmlacademy.ru/profile/id137398)
+* Наставник: [Владислав Молчанов](https://htmlacademy.ru/profile/id137398).
 
 ---
 
