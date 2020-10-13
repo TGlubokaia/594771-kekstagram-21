@@ -46,7 +46,7 @@ const getPictureElements = function () {
   }
   return pictureElements;
 };
-getPictureElements();
+const photoElements = getPictureElements();
 
 // Клонируем элемент
 const renderPhotoElement = function (photo) {
@@ -59,7 +59,7 @@ const renderPhotoElement = function (photo) {
 
 // Добавление нового элемента в список
 const fragment = document.createDocumentFragment();
-for (let i = 0; i < getPictureElements().length; i++) {
-  fragment.appendChild(renderPhotoElement(getPictureElements()[i]));
+for (let i = 0; i < photoElements.length; i++) {
+  fragment.appendChild(renderPhotoElement(photoElements[i]));
 }
 pictureItemslist.appendChild(fragment);
