@@ -15,11 +15,11 @@ const selectedFileInput = document.querySelector('#upload-file');
 const imgOverplay = document.querySelector('.img-upload__overlay');
 const bodyElement = document.querySelector('body');
 const cancelButton = document.querySelector('.img-upload__cancel');
-const slider = document.querySelector('.effect-level__pin');
-const effectsList = document.querySelector('.effects__list');
 const effectsRadios = document.querySelectorAll('.effects__radio');
-const effectsForm = document.querySelector('.img-upload__form');
+
 const imgPreview = document.querySelector('.img-upload__preview');
+const hashtagsInput = document.querySelector('.text__hashtags');
+const submitButton = document.querySelector('.img-upload__submit');
 
 imgOverplay.classList.remove('hidden');
 
@@ -78,10 +78,10 @@ pictureItemslist.appendChild(fragment);
 selectedFileInput.addEventListener('change', function () {
   imgOverplay.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
-  document.addEventListener('keydown', onOverplayEscPress)
+  document.addEventListener('keydown', onOverplayEscPress);
 });
 
-// Закрытие окна 
+// Закрытие окна
 const onOverplayEscPress = function (evt) {
   if (evt.key === 'Escape') {
     evt.preventDefault();
@@ -97,12 +97,9 @@ cancelButton.addEventListener('click', function () {
   getOverplayClose();
 });
 
-// Отпускание ползунка
-slider.addEventListener('mouseup', function () {
-  
-});
-
 // Наложение эффектов
+/*
+const effectsForm = document.querySelector('.img-upload__form');
 const filterChangeHandler = function (evt) {
   if (evt.target.matches('.effects__radio')) {
     const secondClass = imgPreview.classList.item(1);
@@ -118,23 +115,39 @@ const filterChangeHandler = function (evt) {
 effectsForm.addEventListener('change', function () {
   filterChangeHandler()
 });
-/*
-Рабочий вариант наложения эффектов
+*/
+
+// Рабочий вариант наложения эффектов
 const filterChangeHandler = function (preview, effect) {
-  effect.addEventListener('click', function() {
+  effect.addEventListener('click', function () {
     const secondClass = preview.classList.item(1);
     if (secondClass !== null) {
       preview.classList.remove(secondClass);
       preview.classList.add('effects__preview--' + effect.value);
-    } else
-    preview.classList.add('effects__preview--' + effect.value);
+    } else {
+      preview.classList.add('effects__preview--' + effect.value);
+    }
   });
 };
 
 for (let effect of effectsRadios) {
   filterChangeHandler(imgPreview, effect);
-  console.log(imgPreview.classList);
-};
-*/
+}
 
-//
+// Перемещение ползунка
+
+// Валидация хеш-тегов
+submitButton.addEventListener('click', function (evt) {
+  evt.preventDefault();
+  const re = /^#\w{1,19}$/;
+  const hashtagsInputText = hashtagsInput.value;
+  const hashtags = hashtagsInputText.split(" ");
+  const result = hashtags.every(function (v) {
+    return re.test(v);
+  });
+  if (result !== true) {
+    hashtagsInput.setCustomValidity('Что-то пошло не так');
+  } else {
+    hashtagsInput.setCustomValidity('');
+  }
+});
