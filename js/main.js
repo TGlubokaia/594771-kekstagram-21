@@ -15,13 +15,10 @@ const selectedFileInput = document.querySelector('#upload-file');
 const imgOverplay = document.querySelector('.img-upload__overlay');
 const bodyElement = document.querySelector('body');
 const cancelButton = document.querySelector('.img-upload__cancel');
-const effectsRadios = document.querySelectorAll('.effects__radio');
-
+const effectsForm = document.querySelector('.img-upload__form');
 const imgPreview = document.querySelector('.img-upload__preview');
 const hashtagsInput = document.querySelector('.text__hashtags');
 const submitButton = document.querySelector('.img-upload__submit');
-
-imgOverplay.classList.remove('hidden');
 
 // Получение рандомного числа
 const getRandomNumber = function (min, max) {
@@ -91,15 +88,12 @@ const onOverplayEscPress = function (evt) {
 const getOverplayClose = function () {
   imgOverplay.classList.add('hidden');
   document.removeEventListener('keydown', onOverplayEscPress);
-  selectedFileInput.files = '';
 };
 cancelButton.addEventListener('click', function () {
   getOverplayClose();
 });
 
 // Наложение эффектов
-/*
-const effectsForm = document.querySelector('.img-upload__form');
 const filterChangeHandler = function (evt) {
   if (evt.target.matches('.effects__radio')) {
     const secondClass = imgPreview.classList.item(1);
@@ -108,37 +102,13 @@ const filterChangeHandler = function (evt) {
       imgPreview.classList.add('effects__preview--' + evt.target.value);
     } else {
       imgPreview.classList.add('effects__preview--' + evt.target.value);
-    };
-  };
-};
-
-effectsForm.addEventListener('change', function () {
-  filterChangeHandler()
-});
-*/
-
-// Рабочий вариант наложения эффектов
-const filterChangeHandler = function (preview, effect) {
-  effect.addEventListener('click', function () {
-    const secondClass = preview.classList.item(1);
-    if (secondClass !== null) {
-      preview.classList.remove(secondClass);
-      preview.classList.add('effects__preview--' + effect.value);
-    } else {
-      preview.classList.add('effects__preview--' + effect.value);
     }
-  });
+  }
 };
-
-for (let effect of effectsRadios) {
-  filterChangeHandler(imgPreview, effect);
-}
-
-// Перемещение ползунка
+effectsForm.addEventListener('change', filterChangeHandler);
 
 // Валидация хеш-тегов
-submitButton.addEventListener('click', function (evt) {
-  evt.preventDefault();
+submitButton.addEventListener('click', function () {
   const re = /^#\w{1,19}$/;
   const hashtagsInputText = hashtagsInput.value;
   const hashtags = hashtagsInputText.split(" ");
