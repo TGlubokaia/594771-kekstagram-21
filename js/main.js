@@ -11,6 +11,14 @@ const pictureCommentsText = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
+const selectedFileInput = document.querySelector('#upload-file');
+const imgOverplay = document.querySelector('.img-upload__overlay');
+const bodyElement = document.querySelector('body');
+const cancelButton = document.querySelector('.img-upload__cancel');
+const effectsForm = document.querySelector('.img-upload__form');
+const imgPreview = document.querySelector('.img-upload__preview');
+const hashtagsInput = document.querySelector('.text__hashtags');
+const submitButton = document.querySelector('.img-upload__submit');
 
 // Получение рандомного числа
 const getRandomNumber = function (min, max) {
@@ -30,7 +38,6 @@ const getComments = function (text, name) {
   }
   return pictureComments;
 };
-
 
 // Получение массива фото элементов
 const getPictureElements = function () {
@@ -63,3 +70,54 @@ for (let i = 0; i < photoElements.length; i++) {
   fragment.appendChild(renderPhotoElement(photoElements[i]));
 }
 pictureItemslist.appendChild(fragment);
+
+// Загрузка фото
+selectedFileInput.addEventListener('change', function () {
+  imgOverplay.classList.remove('hidden');
+  bodyElement.classList.add('modal-open');
+  document.addEventListener('keydown', onOverplayEscPress);
+});
+
+// Закрытие окна
+const onOverplayEscPress = function (evt) {
+  if (evt.key === 'Escape') {
+    evt.preventDefault();
+    getOverplayClose();
+  }
+};
+const getOverplayClose = function () {
+  imgOverplay.classList.add('hidden');
+  document.removeEventListener('keydown', onOverplayEscPress);
+};
+cancelButton.addEventListener('click', function () {
+  getOverplayClose();
+});
+
+// Наложение эффектов
+const filterChangeHandler = function (evt) {
+  if (evt.target.matches('.effects__radio')) {
+    const secondClass = imgPreview.classList.item(1);
+    if (secondClass !== null) {
+      imgPreview.classList.remove(secondClass);
+      imgPreview.classList.add('effects__preview--' + evt.target.value);
+    } else {
+      imgPreview.classList.add('effects__preview--' + evt.target.value);
+    }
+  }
+};
+effectsForm.addEventListener('change', filterChangeHandler);
+
+// Валидация хеш-тегов
+submitButton.addEventListener('click', function () {
+  const re = /^#\w{1,19}$/;
+  const hashtagsInputText = hashtagsInput.value;
+  const hashtags = hashtagsInputText.split(" ");
+  const result = hashtags.every(function (v) {
+    return re.test(v);
+  });
+  if (result !== true) {
+    hashtagsInput.setCustomValidity('Что-то пошло не так');
+  } else {
+    hashtagsInput.setCustomValidity('');
+  }
+});
