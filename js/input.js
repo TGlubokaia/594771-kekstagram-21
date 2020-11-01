@@ -12,7 +12,7 @@
       const result = hashtags.every(function (v) {
         return re.test(v);
       });
-      if (result !== true) {
+      if (!result) {
         hashtagsInput.setCustomValidity('Что-то пошло не так');
       } else {
         hashtagsInput.setCustomValidity('');
@@ -24,4 +24,4 @@
     onSubmitButton: onSubmitButton,
   };
 })();
-// Валидация хеш-тегов
+
