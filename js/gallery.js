@@ -3,10 +3,7 @@
 (function () {
   const pictureItemTemplate = document.querySelector('#picture').content.querySelector('.picture');
   const pictureItemslist = document.querySelector('.pictures');
-  const allPictures = pictureItemslist.querySelectorAll('a');
   const fragment = document.createDocumentFragment();
-  const imgUpload = pictureItemslist.querySelector('.img-upload');
-  const h = pictureItemslist.querySelector('.pictures__title');
 
   // Клонируем элемент
   const renderPhotoElement = function (photo) {
@@ -17,18 +14,21 @@
     return photoElement;
   };
 
-    // Добавление нового элемента в список
-    const renderPhoto = function (photos) {
-      for (var i = 0; i < photos.length; i++) {
-        fragment.appendChild(renderPhotoElement(photos[i]));
-      }
-      pictureItemslist.appendChild(fragment);
-      window.filter.picturesFilter.classList.remove('img-filters--inactive');
-    };
-
-    window.gallery = {
-      renderPhoto: renderPhoto,
+  // Добавление нового элемента в список
+  const renderPhoto = function (photos) {
+    const allPictures = pictureItemslist.querySelectorAll('a');
+    for (let i = 0; i < allPictures.length; i++) {
+      allPictures[i].remove();
     }
+    for (let j = 0; j < photos.length; j++) {
+      fragment.appendChild(renderPhotoElement(photos[j]));
+    }
+    pictureItemslist.appendChild(fragment);
+    window.filter.picturesFilter.classList.remove('img-filters--inactive');
+  };
+  window.gallery = {
+    renderPhoto: renderPhoto,
+  };
 
 })();
 
