@@ -17,6 +17,7 @@
   const getOverplayClose = function () {
     imgOverplay.classList.add('hidden');
     document.removeEventListener('keydown', onOverplayEscPress);
+    window.picture.imgPreview.classList.remove(window.picture.imgPreview.classList.item(1));
   };
 
   const onselectedFile = function () {

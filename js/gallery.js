@@ -3,8 +3,10 @@
 (function () {
   const pictureItemTemplate = document.querySelector('#picture').content.querySelector('.picture');
   const pictureItemslist = document.querySelector('.pictures');
+  const allPictures = pictureItemslist.querySelectorAll('a');
   const fragment = document.createDocumentFragment();
-  const MAX_PHOTO_ON_SCREEN = 25;
+  const imgUpload = pictureItemslist.querySelector('.img-upload');
+  const h = pictureItemslist.querySelector('.pictures__title');
 
   // Клонируем элемент
   const renderPhotoElement = function (photo) {
@@ -15,26 +17,18 @@
     return photoElement;
   };
 
-  const onSuccess = function (photos) {
-
     // Добавление нового элемента в список
-    for (var i = 0; i < MAX_PHOTO_ON_SCREEN; i++) {
-      fragment.appendChild(renderPhotoElement(photos[i]));
+    const renderPhoto = function (photos) {
+      for (var i = 0; i < photos.length; i++) {
+        fragment.appendChild(renderPhotoElement(photos[i]));
+      }
+      pictureItemslist.appendChild(fragment);
+      window.filter.picturesFilter.classList.remove('img-filters--inactive');
+    };
+
+    window.gallery = {
+      renderPhoto: renderPhoto,
     }
-    pictureItemslist.appendChild(fragment);
-  };
 
-  const onError = function (errorMessage) {
-    let node = document.createElement('div');
-    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-    node.style.position = 'absolute';
-    node.style.left = 0;
-    node.style.right = 0;
-    node.style.fontSize = '30px';
-
-    node.textContent = errorMessage;
-    document.body.insertAdjacentElement('afterbegin', node);
-  };
-
-  window.load(onSuccess, onError);
 })();
+

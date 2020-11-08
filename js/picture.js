@@ -23,6 +23,7 @@
 
   window.picture = {
     onEffectsForm: onEffectsForm,
+    imgPreview: imgPreview,
   };
 })();
 
