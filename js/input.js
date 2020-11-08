@@ -6,13 +6,13 @@
 
   const onSubmitButton = function () {
     submitButton.addEventListener('click', function () {
-      const re = /^#\w{1,19}$/;
+      const re = /\s|^#\w{1,19}$/;
       const hashtagsInputText = hashtagsInput.value;
       const hashtags = hashtagsInputText.split(" ");
       const result = hashtags.every(function (v) {
         return re.test(v);
       });
-      if (!result) {
+      if (!result || hashtags.length > 5) {
         hashtagsInput.setCustomValidity('Что-то пошло не так');
       } else {
         hashtagsInput.setCustomValidity('');
