@@ -4,8 +4,6 @@
   const picturesFilter = document.querySelector('.img-filters');
   let wizards = [];
 
-  picturesFilter.classList.remove('img-filters--inactive');
-  
   const getRandomPhotos = function () {
     let newLoad;
     newLoad = wizards;
