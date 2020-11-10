@@ -1,11 +1,12 @@
 'use strict';
 
 (function () {
+
   const photoPreview = document.querySelector('.big-picture');
   const commentCount = document.querySelector('.social__comment-count');
   const commentLoader = document.querySelector('.comments-loader');
   const pictureCancel = document.querySelector('.big-picture__cancel');
-  const photo = window.filter.photoItems[0];
+  const photo = window.filter.all[0];
 
 
   commentCount.classList.add('hidden');
@@ -13,6 +14,10 @@
 
   pictureCancel.addEventListener('click', function () {
     getClosed();
+  });
+
+  window.gallery.pictureItemslist.addEventListener('click', function () {
+    photoPreview.classList.remove('hidden');
   });
 
   const getClosed = function () {

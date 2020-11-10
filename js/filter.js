@@ -3,6 +3,7 @@
 (function () {
   const picturesFilter = document.querySelector('.img-filters');
   let photoItems = [];
+  let all = []
 
   const getRandomPhotos = function () {
     let newLoad = [];
@@ -15,6 +16,7 @@
       }
     }
     window.gallery.renderPhoto(randomPhotos);
+    all = randomPhotos; 
   };
 
   const getDiscussed = function () {
@@ -25,10 +27,12 @@
       return rankDiff;
     }
     ));
+    all = newPhotos;
   };
+ 
 
   const photosUpdate = function () {
-    window.gallery.renderPhoto(photoItems);
+    all = window.gallery.renderPhoto(photoItems);
   };
 
   const onFilterChange = window.debounce(function (evt) {
@@ -61,5 +65,6 @@
     picturesFilter: picturesFilter,
     onPictureForm: onPictureForm,
     photoItems: photoItems,
+    all: all,
   };
 })();

@@ -29,6 +29,7 @@
   
   window.gallery = {
     renderPhoto: renderPhoto,
+    pictureItemslist: pictureItemslist,
   };
 
 })();
