@@ -26,6 +26,7 @@
     pictureItemslist.appendChild(fragment);
     window.filter.picturesFilter.classList.remove('img-filters--inactive');
   };
+  
   window.gallery = {
     renderPhoto: renderPhoto,
   };

@@ -2,11 +2,11 @@
 
 (function () {
   const picturesFilter = document.querySelector('.img-filters');
-  let wizards = [];
+  let photoItems = [];
 
   const getRandomPhotos = function () {
     let newLoad = [];
-    Object.assign(newLoad, wizards);
+    Object.assign(newLoad, photoItems);
     let randomPhotos = [];
     while (randomPhotos.length < 10) {
       let randomElement = newLoad[window.util.getRandomNumber(0, newLoad.length - 1)];
@@ -19,7 +19,7 @@
 
   const getDiscussed = function () {
     let newPhotos = [];
-    Object.assign(newPhotos, wizards);
+    Object.assign(newPhotos, photoItems);
     window.gallery.renderPhoto(newPhotos.sort(function (left, right) {
       let rankDiff = right.comments.length - left.comments.length;
       return rankDiff;
@@ -28,7 +28,7 @@
   };
 
   const photosUpdate = function () {
-    window.gallery.renderPhoto(wizards);
+    window.gallery.renderPhoto(photoItems);
   };
 
   const onFilterChange = window.debounce(function (evt) {
@@ -47,7 +47,7 @@
   };
 
   const successHandler = function (data) {
-    wizards = data;
+    photoItems = data;
     photosUpdate();
   };
 
@@ -60,5 +60,6 @@
   window.filter = {
     picturesFilter: picturesFilter,
     onPictureForm: onPictureForm,
+    photoItems: photoItems,
   };
 })();
