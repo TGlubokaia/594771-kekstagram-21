@@ -16,9 +16,20 @@
     document.body.insertAdjacentElement('afterbegin', node);
   };
 
+
+
+  const buttonToggle = function (evt, buttons, ACTIVE_CLASS) {
+    buttons.forEach(function (element) {
+      element.classList.remove(ACTIVE_CLASS);
+    });
+    evt.target.classList.add(ACTIVE_CLASS);
+  };
+
   window.util = {
     getRandomNumber: getRandomNumber,
     createErrorMessage: createErrorMessage,
+    buttonToggle: buttonToggle,
+
   };
 })();
 

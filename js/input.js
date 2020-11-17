@@ -6,7 +6,7 @@
 
   const onSubmitButton = function () {
     submitButton.addEventListener('click', function () {
-      const re = /\s|^#\w{1,19}$/;
+      const re = /^$|\s|^#\w{1,19}$/;
       const hashtagsInputText = hashtagsInput.value;
       const hashtags = hashtagsInputText.split(" ");
       const result = hashtags.every(function (v) {

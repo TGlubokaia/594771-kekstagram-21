@@ -16,15 +16,10 @@
 
   // Добавление нового элемента в список
   const renderPhoto = function (photos) {
-    const allPictures = pictureItemslist.querySelectorAll('a');
-    for (let i = 0; i < allPictures.length; i++) {
-      allPictures[i].remove();
-    }
     for (let j = 0; j < photos.length; j++) {
       fragment.appendChild(renderPhotoElement(photos[j]));
     }
     pictureItemslist.appendChild(fragment);
-    window.filter.picturesFilter.classList.remove('img-filters--inactive');
   };
   
   window.gallery = {
