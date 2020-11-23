@@ -4,7 +4,7 @@
   const pictureItemTemplate = document.querySelector('#picture').content.querySelector('.picture');
   const pictureItemslist = document.querySelector('.pictures');
   const fragment = document.createDocumentFragment();
-  
+
 
   // Клонируем элемент
   const renderPhotoElement = function (photo) {
@@ -21,7 +21,7 @@
       fragment.appendChild(renderPhotoElement(photos[j]));
     }
     pictureItemslist.appendChild(fragment);
-    window.preview.onLittlePictures();
+    window.preview.getPreviewData();
   };
   
   window.gallery = {
