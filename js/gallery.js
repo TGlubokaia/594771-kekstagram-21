@@ -7,21 +7,28 @@
 
 
   // Клонируем элемент
-  const renderPhotoElement = function (photo) {
-    const photoElement = pictureItemTemplate.cloneNode(true);
-    photoElement.querySelector('.picture__img').src = photo.url;
-    photoElement.querySelector('.picture__likes').textContent = photo.likes;
-    photoElement.querySelector('.picture__comments').textContent = photo.comments.length;
-    return photoElement;
+  const renderPhotoElement = function (photos) {
+    for (let photo of photos) {
+      const photoElement = pictureItemTemplate.cloneNode(true);
+      photoElement.querySelector('.picture__img').src = photo.url;
+      photoElement.querySelector('.picture__likes').textContent = photo.likes;
+      photoElement.querySelector('.picture__comments').textContent = photo.comments.length;
+      fragment.appendChild(photoElement);
+    }
+    pictureItemslist.appendChild(fragment);
   };
 
   // Добавление нового элемента в список
   const renderPhoto = function (photos) {
-    for (let j = 0; j < photos.length; j++) {
-      fragment.appendChild(renderPhotoElement(photos[j]));
-    }
-    pictureItemslist.appendChild(fragment);
-    window.preview.getPreviewData();
+    renderPhotoElement(photos);
+    const allPictures = document.querySelectorAll(`.picture`);
+    allPictures.forEach(function(element, index) {
+      element.addEventListener(`click`, function () {
+        window.preview.getPreviewData(photos[index]);
+        window.preview.getOpen();
+      })
+    });
+    
   };
   
   window.gallery = {

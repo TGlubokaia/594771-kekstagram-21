@@ -67,6 +67,7 @@
     window.gallery.renderPhoto(data);
     getNewPhotos(data);
 
+
   };
 
   const errorHandler = function (errorMessage) {
